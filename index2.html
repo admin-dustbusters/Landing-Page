@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cohort | Data-Driven Influencer Marketing</title>
+    <meta name="description" content="Turn Influencer Marketing Into Your Most Profitable Acquisition Channel in 90 Days. Stop guessing. Start scaling.">
+    
+    <!-- Google Fonts: Inter (Apple-esque) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        apple: {
+                            bg: '#000000',
+                            card: '#121212',
+                            border: '#2a2a2a',
+                            text: '#f5f5f7',
+                            subtext: '#86868b',
+                            accent: '#2997ff',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #f5f5f7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Gradients */
+        .text-gradient-blue {
+            background: linear-gradient(90deg, #2997ff 0%, #9d65ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Bento Card */
+        .bento-card {
+            background-color: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* Glass Nav */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #f5f5f7;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            transform: scale(1.02);
+        }
+
+        /* Marquee Container */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-container::before,
+        .marquee-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, #000, transparent);
+        }
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, #000, transparent);
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden relative">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav top-0">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-chart-simple text-black text-sm"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Cohort</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="#problem" class="hover:text-white transition-colors">The Problem</a>
+                <a href="#methodology" class="hover:text-white transition-colors">Methodology</a>
+                <a href="#results" class="hover:text-white transition-colors">Case Studies</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+            </div>
+            <a href="#book" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+                Book Strategy Call
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden min-h-screen flex flex-col justify-center">
+        <!-- Abstract Background Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-900/20 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in-up backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-xs font-medium text-gray-300 tracking-wide">Accepting 2 New Brands for November</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-in-up" style="animation-delay: 0.1s; line-height: 1.1;">
+                Turn Influencer Marketing Into Your <br class="hidden md:block">
+                <span class="text-gradient-blue">Most Profitable Acquisition Channel</span><br>
+                in 90 Days
+            </h1>
+
+            <h2 class="text-xl md:text-2xl font-medium text-white mb-6 animate-fade-in-up" style="animation-delay: 0.15s;">
+                Get 3-5X Industry Engagement Rates While Reducing CPM Costs 50-77% Below Target
+            </h2>
+
+            <p class="text-lg text-apple-subtext max-w-4xl mx-auto mb-8 font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+                The exact creator partnership system <strong>DuckDuckGo, Rituals & Ecosia</strong> used to drive 10.4M+ views, 8%+ engagement rates, and provable ROI—without wasting budget on wrong-fit creators.
+            </p>
+
+            <!-- Checklist -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-sm text-gray-300 mb-10 animate-fade-in-up" style="animation-delay: 0.25s;">
+                <div class="flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check text-green-500"></i> Stop guessing who converts
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check text-green-500"></i> Real-time revenue attribution
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check text-green-500"></i> Prove ROI to your CFO
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up mb-16" style="animation-delay: 0.3s;">
+                <a href="#book" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 group">
+                    Book Strategy Call
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#results" class="px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/10 font-medium text-lg transition-all">
+                    See Case Studies
+                </a>
+            </div>
+
+            <!-- Video Thumbnail Container -->
+            <div class="relative max-w-4xl mx-auto animate-fade-in-up group cursor-pointer" style="animation-delay: 0.4s;" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative bg-[#0a0a0a] rounded-2xl border border-white/10 overflow-hidden shadow-2xl aspect-video flex items-center justify-center">
+                    <!-- Fake UI for Video -->
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop" alt="Dashboard Preview" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    
+                    <div class="relative z-10 text-center">
+                        <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                        </div>
+                        <p class="text-white font-medium tracking-wide uppercase text-sm">WATCH: See How We Did It in 30 Days</p>
+                    </div>
+                    
+                    <!-- Floating Metrics -->
+                    <div class="absolute bottom-6 left-6 bg-black/80 backdrop-blur border border-white/10 px-4 py-2 rounded-lg hidden md:block">
+                        <p class="text-xs text-gray-400">CPM Reduction</p>
+                        <p class="text-green-400 font-bold font-mono">-77%</p>
+                    </div>
+                    <div class="absolute bottom-6 right-6 bg-black/80 backdrop-blur border border-white/10 px-4 py-2 rounded-lg hidden md:block">
+                        <p class="text-xs text-gray-400">Views Delivered</p>
+                        <p class="text-blue-400 font-bold font-mono" id="hero-counter">0</p>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-500 mt-4 uppercase tracking-wider">Trusted by brands spending $50K-$500K on creator partnerships</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Marquee -->
+    <section class="py-10 border-y border-white/5 bg-black overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content flex gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 items-center">
+                <!-- Duplicated logos for seamless loop -->
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-google"></i> DuckDuckGo</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-leaf"></i> Ecosia</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-spa"></i> Rituals</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-shopify"></i> Shopify</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-stripe"></i> Stripe</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-mattress-pillow"></i> Casper</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-google"></i> DuckDuckGo</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-leaf"></i> Ecosia</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-spa"></i> Rituals</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-shopify"></i> Shopify</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-brands fa-stripe"></i> Stripe</span>
+                <span class="text-2xl font-bold flex gap-2 items-center"><i class="fa-solid fa-mattress-pillow"></i> Casper</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-32 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">You're Probably Making These <br><span class="text-red-500">Expensive Mistakes</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">If you're spending $50K+ on influencer marketing, you've likely experienced this.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <div class="bg-[#0f0f0f] border border-red-900/20 p-8 rounded-2xl reveal">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-6 text-red-500 text-xl">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Views vs. Sales</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Hired creators with millions of followers → Got views but <span class="text-red-400">zero sales lift</span>.</p>
+                </div>
+                <div class="bg-[#0f0f0f] border border-red-900/20 p-8 rounded-2xl reveal" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-6 text-red-500 text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Zero Attribution</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Paid $30K+ for a campaign → Can't prove ROI or justify the spend to your CFO.</p>
+                </div>
+                <div class="bg-[#0f0f0f] border border-red-900/20 p-8 rounded-2xl reveal" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-6 text-red-500 text-xl">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Vanity Metrics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Obsessed with CPM targets → Missed the creators who actually drive behavior change.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#121212] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden text-center reveal">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-6">The Real Problem: 94% of Brands Target the Wrong Audiences</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                    You've been sold on "follower count" and "engagement rates." But those metrics don't predict conversion. <br><br>
+                    <span class="text-white font-semibold">We analyzed 2,847+ campaigns. Here's what actually moves the needle:</span>
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base">
+                    <div class="flex items-center gap-2 text-green-400 bg-green-900/10 px-4 py-2 rounded-full border border-green-500/20">
+                        <i class="fa-solid fa-check"></i> Audience Values Alignment
+                    </div>
+                    <div class="flex items-center gap-2 text-green-400 bg-green-900/10 px-4 py-2 rounded-full border border-green-500/20">
+                        <i class="fa-solid fa-check"></i> Authenticity Signals
+                    </div>
+                    <div class="flex items-center gap-2 text-green-400 bg-green-900/10 px-4 py-2 rounded-full border border-green-500/20">
+                        <i class="fa-solid fa-check"></i> Community Purchase Intent
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="py-32 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20 reveal">
+                <h2 class="text-4xl font-bold mb-4">The Cohort Method™</h2>
+                <p class="text-gray-400 text-lg">We don't "spray and pray." We build systematic creator strategies you can defend in board meetings.</p>
+            </div>
+
+            <div class="space-y-24 relative">
+                <!-- Vertical Line -->
+                <div class="hidden md:block absolute left-[50%] top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent"></div>
+
+                <!-- Phase 1 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center relative reveal">
+                    <div class="md:text-right">
+                        <div class="inline-block px-3 py-1 bg-blue-900/30 border border-blue-500/30 rounded-full text-blue-400 text-xs font-bold mb-4">PHASE 1</div>
+                        <h3 class="text-3xl font-bold mb-4">Audience Intelligence</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Before touching a single creator, we map your customer psychographics to creator community profiles. We analyze 50+ data points beyond follower count and ER.</p>
+                        <ul class="space-y-2 text-sm text-gray-300 md:justify-end md:flex md:flex-col">
+                            <li class="flex items-center gap-2 md:flex-row-reverse"><i class="fa-solid fa-magnifying-glass text-blue-500"></i> Identify purchase intent signals</li>
+                            <li class="flex items-center gap-2 md:flex-row-reverse"><i class="fa-solid fa-robot text-blue-500"></i> Score authentic engagement</li>
+                        </ul>
+                        <p class="text-xs text-blue-400 mt-4 font-medium">Result: We only recommend creators whose audiences are primed to buy.</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute top-1/2 -left-6 w-12 h-12 bg-[#0a0a0a] border border-blue-500 rounded-full flex items-center justify-center z-10 -translate-y-1/2 hidden md:flex">
+                            <i class="fa-solid fa-brain text-blue-500"></i>
+                        </div>
+                        <div class="bg-[#121212] border border-white/10 p-6 rounded-2xl">
+                             <!-- Decorative Data UI -->
+                             <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+                                 <span class="text-xs text-gray-500">Audience Affinity Score</span>
+                                 <span class="text-green-400 text-xs font-mono">98.4% Match</span>
+                             </div>
+                             <div class="space-y-3">
+                                 <div class="h-2 bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[85%] bg-blue-600"></div></div>
+                                 <div class="h-2 bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[65%] bg-blue-600 opacity-60"></div></div>
+                                 <div class="h-2 bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[92%] bg-blue-600 opacity-80"></div></div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center relative reveal">
+                    <div class="order-2 md:order-1 relative">
+                        <div class="absolute top-1/2 -right-6 w-12 h-12 bg-[#0a0a0a] border border-purple-500 rounded-full flex items-center justify-center z-10 -translate-y-1/2 hidden md:flex">
+                            <i class="fa-solid fa-rocket text-purple-500"></i>
+                        </div>
+                        <div class="bg-[#121212] border border-white/10 p-6 rounded-2xl">
+                             <div class="grid grid-cols-2 gap-4">
+                                 <div class="bg-white/5 p-4 rounded text-center">
+                                     <div class="text-2xl font-bold text-white mb-1">A/B</div>
+                                     <div class="text-xs text-gray-500">Message Testing</div>
+                                 </div>
+                                 <div class="bg-white/5 p-4 rounded text-center">
+                                     <div class="text-2xl font-bold text-white mb-1">24/7</div>
+                                     <div class="text-xs text-gray-500">Real-time Data</div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="inline-block px-3 py-1 bg-purple-900/30 border border-purple-500/30 rounded-full text-purple-400 text-xs font-bold mb-4">PHASE 2</div>
+                        <h3 class="text-3xl font-bold mb-4">Strategic Execution</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Most campaigns fail at execution. We run multi-touchpoint campaigns (not one-off posts) with A/B tested messaging frameworks. We cut losers fast and scale winners faster.</p>
+                        <p class="text-xs text-purple-400 mt-4 font-medium">Result: You see what's working in real-time, not 30 days later.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="grid md:grid-cols-2 gap-12 items-center relative reveal">
+                    <div class="md:text-right">
+                        <div class="inline-block px-3 py-1 bg-green-900/30 border border-green-500/30 rounded-full text-green-400 text-xs font-bold mb-4">PHASE 3</div>
+                        <h3 class="text-3xl font-bold mb-4">Business Impact Tracking</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">We measure what actually matters: Revenue attribution, CAC by creator tier, ROAS vs other channels, and LTV analysis.</p>
+                        <p class="text-xs text-green-400 mt-4 font-medium">Result: You can finally prove influencer marketing works - or kill it if it doesn't.</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute top-1/2 -left-6 w-12 h-12 bg-[#0a0a0a] border border-green-500 rounded-full flex items-center justify-center z-10 -translate-y-1/2 hidden md:flex">
+                            <i class="fa-solid fa-chart-pie text-green-500"></i>
+                        </div>
+                        <div class="bg-[#121212] border border-white/10 p-6 rounded-2xl">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-gray-400 text-sm">ROAS</span>
+                                <span class="text-green-400 font-bold text-xl">4.2x</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-32 relative rounded-lg overflow-hidden flex items-end gap-1 p-2">
+                                <div class="w-1/5 bg-green-900 h-[40%] rounded-t"></div>
+                                <div class="w-1/5 bg-green-800 h-[55%] rounded-t"></div>
+                                <div class="w-1/5 bg-green-700 h-[45%] rounded-t"></div>
+                                <div class="w-1/5 bg-green-600 h-[80%] rounded-t"></div>
+                                <div class="w-1/5 bg-green-500 h-[95%] rounded-t shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="results" class="py-32 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Real Brands. Real Results. <span class="text-gradient-gold">Real ROI.</span></h2>
+                <p class="text-gray-400">Full interactive case studies available on your strategy call.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                
+                <!-- DuckDuckGo -->
+                <div class="bento-card p-8 rounded-3xl flex flex-col relative group reveal">
+                    <div class="absolute top-4 right-4 bg-orange-500/20 text-orange-400 text-xs px-2 py-1 rounded border border-orange-500/30">SaaS/Tech</div>
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-google text-orange-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">DuckDuckGo</h3>
+                    <p class="text-sm text-gray-500 mb-4">Breaking Google's Search Monopoly</p>
+                    
+                    <div class="bg-white/5 rounded-lg p-4 mb-6 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Views</span>
+                            <span class="text-white font-mono">7.3M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Reach</span>
+                            <span class="text-white font-mono">25M</span>
+                        </div>
+                        <div class="flex justify-between border-t border-white/10 pt-2">
+                            <span class="text-gray-400 text-sm">CPM Reduction</span>
+                            <span class="text-green-400 font-mono font-bold">77%</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Strategy: Multi-market campaign with 29 creators. Local-language micro-influencers in Sweden delivered 85% in-market views.
+                    </p>
+                    <a href="#book" class="text-sm text-orange-500 hover:text-orange-400 font-medium mt-auto inline-flex items-center gap-2">
+                        See Case Study <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Rituals -->
+                <div class="bento-card p-8 rounded-3xl flex flex-col relative group reveal" style="transition-delay: 100ms">
+                    <div class="absolute top-4 right-4 bg-pink-500/20 text-pink-400 text-xs px-2 py-1 rounded border border-pink-500/30">Luxury Beauty</div>
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-spa text-pink-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Rituals</h3>
+                    <p class="text-sm text-gray-500 mb-4">Premium Beauty Launch</p>
+                    
+                    <div class="bg-white/5 rounded-lg p-4 mb-6 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Engagement Rate</span>
+                            <span class="text-white font-mono">8.18%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Cost Per Engagement</span>
+                            <span class="text-white font-mono">$2.00</span>
+                        </div>
+                        <div class="flex justify-between border-t border-white/10 pt-2">
+                            <span class="text-gray-400 text-sm">Delivery</span>
+                            <span class="text-green-400 font-mono font-bold">100% On-Time</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Strategy: Vetted for "wholesome, European, refined" aesthetic. 30-day sprint execution across 4 markets.
+                    </p>
+                    <a href="#book" class="text-sm text-pink-500 hover:text-pink-400 font-medium mt-auto inline-flex items-center gap-2">
+                        See 30-Day Sprint <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Ecosia -->
+                <div class="bento-card p-8 rounded-3xl flex flex-col relative group reveal" style="transition-delay: 200ms">
+                    <div class="absolute top-4 right-4 bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded border border-green-500/30">Sustainability</div>
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-leaf text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Ecosia</h3>
+                    <p class="text-sm text-gray-500 mb-4">From $57 to $27 CPM</p>
+                    
+                    <div class="bg-white/5 rounded-lg p-4 mb-6 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Total Views</span>
+                            <span class="text-white font-mono">3.1M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 text-sm">Creators Tested</span>
+                            <span class="text-white font-mono">43</span>
+                        </div>
+                        <div class="flex justify-between border-t border-white/10 pt-2">
+                            <span class="text-gray-400 text-sm">Cost Efficiency</span>
+                            <span class="text-green-400 font-mono font-bold">-53% CPM</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Strategy: Pivoted from performance-first to brand awareness with macro creators. Dropped CPM from $57 to $27 in 8 months.
+                    </p>
+                    <a href="#book" class="text-sm text-green-500 hover:text-green-400 font-medium mt-auto inline-flex items-center gap-2">
+                        See Month-by-Month <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Qualification Section -->
+    <section class="py-32 border-y border-white/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- For You -->
+                <div class="reveal">
+                    <h3 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-green-500"></i> This Is Perfect If You're...
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="p-6 bg-white/5 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                            <h4 class="font-bold text-lg text-white mb-2">A DTC/E-Commerce Brand</h4>
+                            <p class="text-gray-400 text-sm">Doing $500K–$50M/year and ready to add a predictable, scalable acquisition channel that doesn't depend on iOS updates or algorithm changes.</p>
+                        </div>
+                        <div class="p-6 bg-white/5 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                            <h4 class="font-bold text-lg text-white mb-2">A Marketing Director</h4>
+                            <p class="text-gray-400 text-sm">Who's tried influencer marketing but couldn't prove ROI - and now you need a system your CFO will actually approve.</p>
+                        </div>
+                        <div class="p-6 bg-white/5 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                            <h4 class="font-bold text-lg text-white mb-2">Ready to Invest Strategically</h4>
+                            <p class="text-gray-400 text-sm">You have $50K–$500K to deploy across 90–180 days and want data-driven decision making, not guesswork.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Not For You -->
+                <div class="reveal">
+                    <h3 class="text-3xl font-bold mb-8 flex items-center gap-3 text-gray-400">
+                        <i class="fa-solid fa-circle-xmark text-red-500"></i> This Is NOT For You If...
+                    </h3>
+                    <div class="bg-[#121212] p-8 rounded-3xl border border-red-900/20 h-full">
+                        <ul class="space-y-6">
+                            <li class="flex gap-4 text-gray-400">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                                <span>You're looking for "cheap" shoutouts or quick viral moments.</span>
+                            </li>
+                            <li class="flex gap-4 text-gray-400">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                                <span>You want results "this week" (our process takes 30–60 days to show traction).</span>
+                            </li>
+                            <li class="flex gap-4 text-gray-400">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                                <span>You aren't ready to invest $50K+ in a strategic 90-day pilot.</span>
+                            </li>
+                            <li class="flex gap-4 text-gray-400">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                                <span>You can't provide product/access for creator testing.</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8 pt-8 border-t border-white/5">
+                            <p class="text-xs text-yellow-500 font-mono text-center">
+                                <i class="fa-solid fa-triangle-exclamation"></i> We only take 5 new brands per month.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer / CTA Section -->
+    <section id="book" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-block px-4 py-1 rounded-full bg-blue-600/10 text-blue-400 text-sm font-bold mb-6 border border-blue-500/20 animate-pulse">
+                LIMITED-TIME OFFER
+            </div>
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 tracking-tight">Don't Let Another Quarter Go By Watching Competitors Win.</h2>
+            
+            <!-- Offer Bento -->
+            <div class="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden text-left mb-12 reveal shadow-2xl">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-10 border-b md:border-b-0 md:border-r border-white/10">
+                        <div class="text-xs font-bold text-gray-500 uppercase mb-4">What You Get Free</div>
+                        <h3 class="text-2xl font-bold mb-6 text-white">📊 The Strategy Call Package</h3>
+                        <ul class="space-y-4 text-gray-300 text-sm">
+                            <li class="flex gap-3"><i class="fa-solid fa-check text-blue-500"></i> <strong>Interactive Case Studies</strong> (DuckDuckGo, Rituals, Ecosia)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-check text-blue-500"></i> <strong>Custom Creator Roadmap</strong> with projected ROI</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-check text-blue-500"></i> <strong>Live Dashboard Walkthrough</strong></li>
+                            <li class="flex gap-3"><i class="fa-solid fa-check text-blue-500"></i> <strong>Creator Vetting Framework</strong></li>
+                        </ul>
+                        <p class="mt-6 text-xs text-gray-500 italic">Valued at $5,000 in consulting fees.</p>
+                    </div>
+                    <div class="p-10 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
+                        <div class="text-xs font-bold text-blue-400 uppercase mb-4">The Guarantee</div>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Results or We Work Free</h3>
+                        <p class="text-gray-300 leading-relaxed text-sm mb-6">
+                            If you don't see measurable improvement in your creator ROI metrics within the first 90 days, we'll work with you for another 90 days completely free. No loopholes.
+                        </p>
+                        <!-- Calendly Placeholder -->
+                        <div class="w-full h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold cursor-pointer transition-all shadow-lg">
+                            Select a Time for Your Call
+                        </div>
+                        <div class="text-center mt-3">
+                             <span class="text-xs text-gray-400"><span class="text-green-400">●</span> 3 of 5 spots remaining for November</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- P.S. / P.P.S. -->
+            <div class="max-w-2xl mx-auto text-left text-gray-400 space-y-6 text-sm reveal">
+                <p><strong class="text-white">P.S.</strong> On your strategy call, you'll get exclusive access to our full interactive case studies for DuckDuckGo, Rituals, and Ecosia. These aren't PDFs. They're immersive, scrolling experiences with real content and exact metrics. You'll see the specific mistakes we made and lessons learned.</p>
+                <p><strong class="text-white">P.P.S.</strong> Still on the fence? Your competitors are already working with creators. The question isn't "Should we do influencer marketing?" It's "How do we do it strategically so it actually drives business results?" Book the call. See the data. Make an informed decision.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Story -->
+    <section class="py-20 bg-[#080808] border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-10 items-center reveal">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 shrink-0 overflow-hidden border-4 border-white/10 shadow-xl">
+                    <!-- Placeholder for founder image -->
+                    <i class="fa-solid fa-user text-5xl text-gray-500 w-full h-full flex items-center justify-center"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Why Cohort Is Different</h3>
+                    <div class="space-y-4 text-gray-400 leading-relaxed text-lg">
+                        <p>Most agencies are run by marketers who stumbled into influencer marketing. <strong>We're run by data scientists.</strong></p>
+                        <p>We came from Meta, TikTok, and YouTube. We got tired of watching brands waste millions on viral moments that didn't compound.</p>
+                        <p>We built Cohort around one principle: <strong>If we can't track it to business outcomes, we don't recommend it.</strong></p>
+                    </div>
+                    <div class="mt-6 flex gap-8">
+                        <div>
+                            <p class="text-2xl font-bold text-white">$47M+</p>
+                            <p class="text-xs text-gray-500 uppercase">Tracked Revenue</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-white">2,847+</p>
+                            <p class="text-xs text-gray-500 uppercase">Campaigns Analyzed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-32">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Common Questions</h2>
+            <div class="space-y-4 reveal">
+                <!-- FAQ Items -->
+                <details class="group border border-white/10 rounded-2xl bg-[#0a0a0a] open:bg-[#111] transition-colors">
+                    <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-lg">
+                        How much does this cost?
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+                        Investment ranges from $50K–$500K depending on campaign scope and duration. Most brands start with a 90-day pilot ($50K–$150K). We'll give you exact pricing on the strategy call based on your goals and market.
+                    </div>
+                </details>
+                <details class="group border border-white/10 rounded-2xl bg-[#0a0a0a] open:bg-[#111] transition-colors">
+                    <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-lg">
+                        How long until we see results?
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+                        Most brands see initial data within 30–45 days. Significant optimization and scale happens at the 90-day mark once we've tested enough variables.
+                    </div>
+                </details>
+                <details class="group border border-white/10 rounded-2xl bg-[#0a0a0a] open:bg-[#111] transition-colors">
+                    <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-lg">
+                        What if the creators don't perform?
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+                        That's on us. We guarantee results or we work free. Plus, we only recommend creators after analyzing their audience fit, so our success rate is extremely high.
+                    </div>
+                </details>
+                <details class="group border border-white/10 rounded-2xl bg-[#0a0a0a] open:bg-[#111] transition-colors">
+                    <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-lg">
+                        Can we start small and scale?
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+                        Absolutely. Many of our best clients started with a $50K pilot. Once you see the ROI, scaling is easy. The hard part is getting the system dialed in - which is what the first 90 days accomplish.
+                    </div>
+                </details>
+                <details class="group border border-white/10 rounded-2xl bg-[#0a0a0a] open:bg-[#111] transition-colors">
+                    <summary class="flex cursor-pointer list-none items-center justify-between p-6 font-medium text-lg">
+                        What do we need to provide?
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+                        Product samples for creators, brand guidelines, access to your customer data (for audience mapping), and a point person for approvals. We handle everything else.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10 bg-black text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-white"></i>
+                <span class="text-white font-bold">Cohort</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p>&copy; 2025 WeAreCohort. All Rights Reserved.</p>
+                <p class="text-xs mt-2 opacity-50">Not affiliated with or endorsed by Meta, TikTok, YouTube, Instagram, or any social media platform.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Bottom CTA for Mobile -->
+    <div class="fixed bottom-0 left-0 w-full bg-black/80 backdrop-blur-lg border-t border-white/10 p-4 md:hidden z-40" id="mobile-cta">
+        <a href="#book" class="block w-full bg-blue-600 text-white text-center font-bold py-3 rounded-lg shadow-lg">
+            Book Strategy Call
+        </a>
+    </div>
+
+    <!-- Exit Intent Popup -->
+    <div id="exit-popup" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-[#121212] border border-white/10 rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl relative transform scale-95 transition-transform duration-300">
+            <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-file-arrow-down text-blue-400 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2 text-white">Wait! Before you go...</h3>
+                <p class="text-gray-400 mb-6">Get our free guide: <strong>"The 7 Creator Metrics That Actually Predict ROI"</strong></p>
+                <input type="email" placeholder="Enter your work email" class="w-full bg-black border border-white/20 rounded-lg px-4 py-3 text-white mb-4 focus:border-blue-500 focus:outline-none">
+                <button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition-colors">
+                    Send Me The Guide
+                </button>
+                <button onclick="closePopup()" class="mt-4 text-sm text-gray-500 hover:text-gray-300 underline">
+                    No thanks, I prefer guessing.
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Reveal on Scroll
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 2. Lucide Icons
+        lucide.createIcons();
+
+        // 3. Live Counter Animation
+        function animateValue(id, start, end, duration) {
+            // Find the element
+            const counterElement = document.getElementById(id);
+            
+            // If element doesn't exist, stop immediately
+            if (!counterElement) return;
+
+            const range = end - start;
+            // We want 100k increments for large numbers like this
+            const increment = end > start ? 100000 : -100000; 
+            
+            // Calculate proper step time based on total duration
+            // Total steps = range / increment
+            // Step time = duration / total steps
+            const stepTime = Math.abs(Math.floor(duration / (range / 100000)));
+            
+            let current = start;
+            
+            const timer = setInterval(function() {
+                current += increment;
+                
+                // Check existence inside interval to prevent errors if element removed
+                if (counterElement) {
+                    counterElement.innerHTML = (current / 1000000).toFixed(1) + "M";
+                }
+                
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    clearInterval(timer);
+                    if (counterElement) counterElement.innerHTML = "10.4M+";
+                }
+            }, Math.max(stepTime, 20)); // Ensure minimum 20ms interval for performance
+        }
+
+        // Trigger counter
+        const startCounter = () => {
+             setTimeout(() => {
+                animateValue("hero-counter", 0, 10400000, 2000);
+            }, 500);
+        };
+
+        // Use readyState check to ensure we don't miss the load event
+        if (document.readyState === 'complete') {
+            startCounter();
+        } else {
+            window.addEventListener('load', startCounter);
+        }
+
+        // 4. Exit Intent Logic
+        let popupShown = false;
+        const exitPopup = document.getElementById('exit-popup');
+        const popupContent = exitPopup.querySelector('div');
+
+        const showPopup = () => {
+            if (popupShown) return;
+            exitPopup.classList.remove('hidden');
+            // Small timeout to allow display:block to apply before opacity transition
+            setTimeout(() => {
+                exitPopup.classList.remove('opacity-0');
+                popupContent.classList.remove('scale-95');
+                popupContent.classList.add('scale-100');
+            }, 10);
+            popupShown = true;
+        };
+
+        const closePopup = () => {
+            exitPopup.classList.add('opacity-0');
+            popupContent.classList.remove('scale-100');
+            popupContent.classList.add('scale-95');
+            setTimeout(() => {
+                exitPopup.classList.add('hidden');
+            }, 300);
+        };
+
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0) showPopup();
+        });
+    </script>
+
+</body>
+</html>
